@@ -6,12 +6,12 @@ public class Animal {
 	private char abbreviation;
 	private String name, species;
 	private int life;
-	private double atualX;
-    private double atualY;
+	protected double atualX;
+	protected double atualY;
     
-    
-    double novoX = atualX;
-	double novoY = atualY;
+ // Variáveis de coordenadas iniciais
+    protected double novoX;
+    protected double novoY;
 	
 	// RECEBE O NOME, ESPECIE E SIGLA DO ANIMAL
 	public Animal(String name, String species, char abbreviation, int life, double startX, double startY) {
@@ -21,94 +21,33 @@ public class Animal {
         this.life = life;
         this.atualX = startX;
         this.atualY = startY;
+        
+        // Inicializa as coordenadas iniciais do animal
+        this.novoX = startX;
+        this.novoY = startY;
     }
-    
-    public void andar(Terreno terreno, int nPassos) {
-    	// se a quantidade de passos for 4, o animal pode ir apenas para esquerda, direita, cima e baixo.
-    	// se a quantidade de passos for 7, o animal pode fazer todos os movimentos, inclusive na diagonal.
-    	// se a quantidade for 11, o animal pode dar 2 passos em alguma direção.
-    	int direcao = new Random().nextInt(nPassos);
-
-		//novas coordenadas de movimento
-		
-		
-		switch(direcao) {
-		case 1: //baixo
-			moveDown();
-			break;
-		case 2: //cima
-			moveUp();
-			break;
-		case 3: //direita
-			moveRight();
-			break;
-		case 4: //esquerda
-			moveLeft();
-			break;
-		case 5: // dois passos para cima
-			moveUp();
-			moveUp();
-			break;
-		case 6: // dois passos para baixo
-			novoX++;
-			novoX++;
-			break;
-		case 7: //dois passos para a esquerda
-			novoY--;
-			novoY--;
-			break;
-		case 8: // dois passos para a direita
-			novoY++;
-			novoY++;
-			break;
-		case 9: //diagonal-inferior-direita
-			moveDown();
-			novoY++;
-			break;
-		case 10: //diagonal-inferior-esquerda
-			moveDown();
-			novoY--;
-			break;
-		case 11: //diagonal-superior-esquerda
-			moveUp();
-			novoY--;
-			break;
-		case 12: //diagonal-superior-direita
-			moveUp();
-			novoY++;
-			break;
+	
+	public void encontrar(Animal outroAnimal) {
+		if(this.getAtualX() == outroAnimal.getAtualX() && this.getAtualY() == outroAnimal.getAtualY()){
+			if(this.getSpecies() == "Predador" && outroAnimal.getSpecies()  == "Presa") {
+				outroAnimal.decreaseLife();
+				System.out.printf("%s atacou o %s", this.getName(), outroAnimal.getName());
+			}
 		}
-			
-		
-		if(novoX >= 0 && novoX < terreno.getTamanho() && novoY >= 0 && novoY < terreno.getTamanho()) {
-			terreno.tirarAnimal(atualX, atualY);
-			terreno.adicionarAnimal(this, novoX, novoY);
-			atualX = novoX;
-			atualY = novoY;
-    	}
-		
 	}
-    private void moveDown() {
-    	//move para a baixo
-    	novoX++;
-    }
-    
-    private void moveUp() {
-    	//move para a cima
-    	novoX--;
-    }
-    
-    private void moveRight() {
-    	//move para a direita
-    	novoY++;
-    }
-    
-    private void moveLeft() {
-    	//move para a direita
-    	novoY--;
-    }
-    
-    
+	
+	public void morrer() {
+		if(this.getLife() == 0) {
+			System.out.printf("%s morreu", this.getName());
+			ceuDosAnimais();
+		}
+	}
+	
+	public void ceuDosAnimais() {
+		this.atualX = 0;
+		this.atualY = 0;
+	}
+	
 	// RETORNA O NOME, ESPECIE, VIDA E SIGLA DO ANIMAL
 	
 	public String getName() {
@@ -146,5 +85,35 @@ public class Animal {
     
     public void increaseLife() {
     	this.life++;
+    }
+    
+    public void andar(Terreno terreno) {
+    	int direcao = new Random().nextInt(4);
+		//novas coordenadas de movimento
+		novoX = atualX;
+		novoY = atualY;
+		
+		switch(direcao) {
+		case 0: //baixo
+			novoX++;
+			break;
+		case 1: //cima
+			novoX--;
+			break;
+		case 2: //direita
+			novoY++;
+			break;
+		case 3: //esquerda
+			novoY--;
+			break;
+		}
+			
+		
+		if(novoX >= 0 && novoX < terreno.getTamanho() && novoY >= 0 && novoY < terreno.getTamanho()) {
+			terreno.tirarAnimal(atualX, atualY);
+			terreno.adicionarAnimal(this, novoX, novoY);
+			atualX = novoX;
+			atualY = novoY;
+    	}
     }
 }

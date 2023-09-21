@@ -3,44 +3,49 @@ package ecossistema_floresta;
 //import java.util.Random;
 
 import main.java.br.nassau.floresta.Coelho;
+import main.java.br.nassau.floresta.Galinha;
 import main.java.br.nassau.floresta.Leao;
-
+import main.java.br.nassau.floresta.Tigre;
+import main.java.br.nassau.floresta.Veado;
 import main.java.br.nassau.floresta.Terreno;
 
 public class Ecossistema {
 	public static void main(String[] args) {
 		
-		Terreno terreno = new Terreno(5);
+		Terreno terreno = new Terreno(7);
 		
-		Coelho coelho = new Coelho("Coelho", "Mamiferos", 'C', 1, 1, 1);
-		Leao leao = new Leao("Leão", "Carnivoro", 'L', 2, 3, 3);
+		Coelho coelho = new Coelho(2, 3);
+		Leao leao = new Leao(3, 4);
+		Tigre tigre = new Tigre(4, 5);
+		Galinha galinha = new Galinha(5,6);
+		Veado veado = new Veado(2,6);
 		
 		terreno.exibirTerreno();
 		
-		while(leao.getLife() > 0 && coelho.getLife() > 0) {
+		while(leao.getLife() >= 0 && coelho.getLife() >= 0) {
 			
-			coelho.andar(terreno, 11);
+			coelho.andar(terreno);
+			leao.andar(terreno);
+			tigre.andar(terreno);
+			galinha.andar(terreno);
+			veado.andar(terreno);
 			
-			leao.andar(terreno, 4);
 			// Exiba o terreno
 			terreno.exibirTerreno();
-			
-			if (coelho.getAtualX() == leao.getAtualX() && coelho.getAtualY() == leao.getAtualY()) {
 
-				leao.increaseLife();
+		    leao.encontrar(coelho);
+		    leao.encontrar(veado);
+		    leao.encontrar(galinha);
+		    tigre.encontrar(coelho);
+		    tigre.encontrar(veado);
+		    tigre.encontrar(galinha);
 			    
-				System.out.println("vida do coelho:" + coelho.getLife());
-			    System.out.println("vida do leao:" + leao.getLife());
-			    
-				coelho.decreaseLife();
-			    
-			    System.out.println("leao atacou o coelho");
-			    
-			    leao.rugir();
-			}
+		    coelho.morrer();
+		    veado.morrer();
+		    galinha.morrer();
 			try {
 				 // Um segundo para exibir o proximo movimento
-	            Thread.sleep(1000);
+	            Thread.sleep(100);
 	        } catch (InterruptedException e) {
 	            e.printStackTrace();
 	        }

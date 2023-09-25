@@ -5,7 +5,7 @@ import java.util.Random;
 public class Coelho extends Animal {
 	// Construtor para Coelho
 	public Coelho(double startX, double startY) {
-		super("Coelho", "Presa", 'C', 1, startX, startY);
+		super("Coelho", "Presa", 'C', 5, startX, startY);
 	}
 
 	public void andar(Terreno terreno) {

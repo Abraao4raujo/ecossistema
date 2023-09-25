@@ -9,10 +9,6 @@ public class Animal {
 	protected double atualX;
 	protected double atualY;
 
-	// Variáveis de coordenadas iniciais
-//    protected double novoX;
-//    protected double novoY;
-
 	// RECEBE O NOME, ESPECIE E SIGLA DO ANIMAL
 	public Animal(String name, String species, char abbreviation, int life, double startX, double startY) {
 		this.name = name;
@@ -21,9 +17,6 @@ public class Animal {
 		this.life = life;
 		this.atualX = startX;
 		this.atualY = startY;
-		// Inicializa as coordenadas iniciais do animal
-//        this.novoX = startX;
-//        this.novoY = startY;
 	}
 
 	// RETORNA O NOME, ESPECIE, VIDA E SIGLA DO ANIMAL

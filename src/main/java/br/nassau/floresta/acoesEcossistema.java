@@ -19,11 +19,29 @@ public class acoesEcossistema {
 
 	public void iniciarEcossistema() {
 		terreno.exibirTerreno();
-
-		while (coelho.getLife() > 0) {
+		
+		while (leao.getLife() > 0) {
 
 			System.out.println(coelho.getLife());
 
+//			terreno.adicionarPlanta(1, 2);
+//			terreno.adicionarPlanta(4, 5);
+//			terreno.adicionarPlanta(6, 6);
+//			
+			Planta planta = new Planta('|', 1, 2, terreno);
+			Planta planta2 = new Planta('|', 3, 5, terreno);
+			Planta planta3 = new Planta('|', 5, 6, terreno);
+			
+			if(coelho.getAtualX() == planta.getAtualX() && coelho.getAtualY() == planta.getAtualY() ||
+				coelho.getAtualX() == planta2.getAtualX() && coelho.getAtualY() == planta2.getAtualY() ||
+				coelho.getAtualX() == planta3.getAtualX() && coelho.getAtualY() == planta3.getAtualY()) {
+				System.out.println("coelho ganhou mais vida");
+				coelho.increaseLife();
+			}
+//			planta.colocarPlanta(terreno);
+//			planta2.colocarPlanta(terreno);
+//			planta3.colocarPlanta(terreno);
+			
 			if (coelho.getLife() > 0) {
 				leao.encontrarAnimal(coelho, terreno);
 				tigre.encontrarAnimal(coelho, terreno);

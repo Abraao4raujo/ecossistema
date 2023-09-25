@@ -20,7 +20,7 @@ public class acoesEcossistema {
 	public void iniciarEcossistema() {
 		terreno.exibirTerreno();
 
-		while (veado.getLife() > 0 || coelho.getLife() > 0 || galinha.getLife() > 0) {
+		while (coelho.getLife() > 0) {
 
 			System.out.println(coelho.getLife());
 
@@ -29,13 +29,13 @@ public class acoesEcossistema {
 				tigre.encontrarAnimal(coelho, terreno);
 				coelho.andar(terreno);
 			}
-			
+
 			if (veado.getLife() > 0) {
 				leao.encontrarAnimal(veado, terreno);
 				tigre.encontrarAnimal(veado, terreno);
 				veado.andar(terreno);
 			}
-			
+
 			if (galinha.getLife() > 0) {
 				tigre.encontrarAnimal(galinha, terreno);
 				leao.encontrarAnimal(galinha, terreno);
@@ -50,7 +50,7 @@ public class acoesEcossistema {
 
 			try {
 				// Um segundo para exibir o proximo movimento
-				Thread.sleep(100);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

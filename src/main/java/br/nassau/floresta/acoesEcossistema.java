@@ -3,11 +3,13 @@ package main.java.br.nassau.floresta;
 public class acoesEcossistema {
 	// variaveis de todos os animais e do terreno;
 	private Terreno terreno;
-	private Coelho coelho;
-	private Leao leao;
-	private Tigre tigre;
-	private Galinha galinha;
-	private Veado veado;
+	private Coelho coelho; // aparece no console como: C
+	private Leao leao; // aparece no console como: L
+	private Tigre tigre; // aparece no console como: T
+	private Galinha galinha; // aparece no console como: G
+	private Veado veado; // aparece no console como: V
+	// planta no console como : |
+	// arbusto no console como: *
 
 	// criando terreno e seu tamanho
 	// criando animais com suas respectivas coordenadas.

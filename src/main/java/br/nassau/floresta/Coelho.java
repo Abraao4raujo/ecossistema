@@ -8,13 +8,18 @@ public class Coelho extends Animal {
 		super("Coelho", "Presa", 'C', 1, startX, startY);
 	}
 
+	// Método diferente do Método andar de animal, pois o coelho consegue andar nas
+	// laterais, enquanto outros animais andam apenas para cima, baixo, direita e
+	// esquerda
 	public void andar(Terreno terreno) {
 
-		int direcao = new Random().nextInt(8); // Gerar uma direção aleatória de 0 a 7
+		// Gerar uma direção aleatória de 0 a 7
+		int direcao = new Random().nextInt(8);
 
 		double novoX = atualX;
 		double novoY = atualY;
 
+		// move o animal para 1 casa em qualquer lado
 		switch (direcao) {
 		case 0: // baixo
 			novoX++;
@@ -45,6 +50,8 @@ public class Coelho extends Animal {
 			novoY++;
 			break;
 		}
+
+		// Verificar se a nova posiçäo é maior que 0 e menor que o tamanho do terreno
 		if (novoX >= 0 && novoX < terreno.getTamanho() && novoY >= 0 && novoY < terreno.getTamanho()) {
 			terreno.tirarAnimal(atualX, atualY);
 			terreno.adicionarAnimal(this, novoX, novoY);

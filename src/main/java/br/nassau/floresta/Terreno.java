@@ -33,14 +33,14 @@ public class Terreno {
 			mapa[(int) x][(int) y] = animal.getabbreviation();
 		}
 	}
-	
+
 	// ADICIONAR PLANTAS NO MAPA
-	
+
 	public void adicionarPlanta(char abbreviation, int posX, int posY) {
-        int x = posX;
-        int y = posY;
-        
-        mapa[x][y] = abbreviation;
+		int x = posX;
+		int y = posY;
+
+		mapa[x][y] = abbreviation;
 	}
 
 	// TIRAR ANIMAL ANIMAL DO TERRENO

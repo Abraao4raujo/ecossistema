@@ -3,14 +3,18 @@ package main.java.br.nassau.floresta;
 import java.util.Random;
 
 public class Veado extends Animal {
+
 	// Construtor para Veado
 	public Veado(double startX, double startY) {
 		super("Veado", "Presa", 'V', 3, startX, startY);
 	}
 
+	// Método diferente do Método andar de animal, pois o coelho consegue andar nas
+	// laterais, enquanto outros animais andam apenas para cima, baixo, direita e
+	// esquerda
 	public void andar(Terreno terreno) {
-
-		int direcao = new Random().nextInt(8); // Gerar uma direção aleatória de 0 a 7
+		// Gerar uma direção aleatória de 0 a 7
+		int direcao = new Random().nextInt(8);
 
 		double novoX = atualX;
 		double novoY = atualY;
@@ -45,6 +49,8 @@ public class Veado extends Animal {
 			novoY++;
 			break;
 		}
+
+		// Verificar se a nova posiçäo é maior que 0 e menor que o tamanho do terreno
 		if (novoX >= 0 && novoX < terreno.getTamanho() && novoY >= 0 && novoY < terreno.getTamanho()) {
 			terreno.tirarAnimal(atualX, atualY);
 			terreno.adicionarAnimal(this, novoX, novoY);

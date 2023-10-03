@@ -1,5 +1,7 @@
 package main.java.br.nassau.floresta;
 
+import java.util.List;
+
 public class Terreno {
 	private char[][] mapa;
 	private int tamanho;
@@ -44,13 +46,30 @@ public class Terreno {
 	}
 
 	// TIRAR ANIMAL ANIMAL DO TERRENO
-	public void tirarAnimal(double xAtual, double yAtual) {
-		mapa[(int) xAtual][(int) yAtual] = ' ';
+	public void tirarAnimal(double xAtual, double yAtual, List<Animal> animals) {
+		for (Animal animal : animals) {
+			if (animal.getAtualX() == xAtual && animal.getAtualY() == yAtual) {
+				mapa[(int) xAtual][(int) yAtual] = ' ';
+			}
+		}
 	}
 
 	// EXIBIR O TERRENO NO CONSOLE
 
-	public void exibirTerreno() {
+	public void exibirTerreno(List<Animal> animals, List<Planta> plantas) {
+		limparTerreno();
+
+		for (Planta planta : plantas) {
+			adicionarPlanta(planta.getAbbreviation(), planta.getAtualX(), planta.getAtualY());
+		}
+
+		for (Animal animal : animals) {
+			if (animal.getLife() > 0) {
+				adicionarAnimal(animal, animal.getAtualX(), animal.getAtualY());
+			}
+		}
+
+		// Exibir o terreno
 		for (int i = 0; i < mapa.length; i++) {
 			for (int j = 0; j < mapa[0].length; j++) {
 				System.out.print(mapa[i][j] + "_");
@@ -58,6 +77,15 @@ public class Terreno {
 			System.out.println();
 		}
 		System.out.println();
+	}
+
+	// limpar terreno
+	public void limparTerreno() {
+		for (int i = 0; i < mapa.length; i++) {
+			for (int j = 0; j < mapa[i].length; j++) {
+				mapa[i][j] = ' ';
+			}
+		}
 	}
 
 }

@@ -1,5 +1,6 @@
 package main.java.br.nassau.floresta;
 
+import java.util.List;
 import java.util.Random;
 
 public class Animal {
@@ -7,11 +8,11 @@ public class Animal {
 	private char abbreviation;
 	private String name, species;
 	private int life;
-	protected double atualX;
-	protected double atualY;
+	private int atualX;
+	private int atualY;
 
 	// Construtor da classe Animal
-	public Animal(String name, String species, char abbreviation, int life, double startX, double startY) {
+	public Animal(String name, String species, char abbreviation, int life, int startX, int startY) {
 		// Inicializa os campos com os valores passados como argumentos
 		this.name = name;
 		this.species = species;
@@ -44,23 +45,13 @@ public class Animal {
 	}
 
 	// retorna a coordenada X do animal
-	public double getAtualX() {
+	public int getAtualX() {
 		return atualX;
 	}
 
 	// retorna a coordenada Y do animal
-	public double getAtualY() {
+	public int getAtualY() {
 		return atualY;
-	}
-
-	// Define a coordenada X do animal
-	public double setAtualX(double atualX) {
-		return this.atualX = atualX;
-	}
-
-	// Define a coordenada Y do animal
-	public double setAtualY(double atualY) {
-		return this.atualY = atualY;
 	}
 
 	// Define a vida do animal
@@ -79,12 +70,11 @@ public class Animal {
 	}
 
 	// Mover o animal no terreno
-	public void andar(Terreno terreno) {
-
+	public void andar(Terreno terreno, List<Animal> animals) {
 		// Gera uma direção de movimento aleatória (0 a 3)
 		int direcao = new Random().nextInt(4);
-		double novoX = atualX;
-		double novoY = atualY;
+		int novoX = atualX;
+		int novoY = atualY;
 
 		switch (direcao) {
 		case 0: // baixo
@@ -103,20 +93,24 @@ public class Animal {
 
 		// Verifica se as novas coordenadas estão dentro do terreno
 		if (novoX >= 0 && novoX < terreno.getTamanho() && novoY >= 0 && novoY < terreno.getTamanho()) {
-			terreno.tirarAnimal(atualX, atualY);
-			terreno.adicionarAnimal(this, novoX, novoY);
-			atualX = novoX;
-			atualY = novoY;
+			if (animals.contains(this)) {
+				terreno.tirarAnimal(atualX, atualY, animals);
+				atualX = novoX;
+				atualY = novoY;
+				terreno.adicionarAnimal(this, novoX, novoY);
+			}
+
 		}
 	}
 
-	// Método para o animal encontrar outro animal no terreno
-	public void encontrarAnimal(Animal outroAnimal, Terreno terreno) {
-		if (this.getAtualX() == outroAnimal.getAtualX() && this.getAtualY() == outroAnimal.getAtualY()) {
-			if (this.getSpecies().equals("Predador") && outroAnimal.getSpecies().equals("Presa")) {
-				outroAnimal.decreaseLife();
-				System.out.printf("%s atacou o %s%n", this.getName(), outroAnimal.getName());
-			}
+	public boolean podeAtacar(Animal outroAnimal) {
+		return this.getSpecies().equals("Predador") && !this.equals(outroAnimal)
+				&& outroAnimal.getSpecies().equals("Presa");
+	}
+
+	public void atacar(Animal outroAnimal) {
+		if (this.podeAtacar(outroAnimal)) {
+			outroAnimal.decreaseLife();
 		}
 	}
 }

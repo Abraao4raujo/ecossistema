@@ -2,7 +2,8 @@ package main.java.br.nassau.floresta;
 
 public class Leao extends Animal {
 	// Construtor para Leao
-	public Leao(double startX, double startY) {
+
+	public Leao(int startX, int startY) {
 		super("Leao", "Predador", 'L', 5, startX, startY);
 	};
 

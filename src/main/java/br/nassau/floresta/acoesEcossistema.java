@@ -8,15 +8,8 @@ public class acoesEcossistema {
 	private List<Animal> animals = new ArrayList<>();
 	private List<Planta> plantas = new ArrayList<>();
 	Scanner sc = new Scanner(System.in);
-//	private List<Arbusto> arbustos = new ArrayList<>();
 
 	private Terreno terreno;
-	// variaveis de todos os animais e do terreno;
-	// planta no console como : |
-	// arbusto no console como: *
-
-	// criando terreno e seu tamanho
-	// criando animais com suas respectivas coordenadas.
 	public acoesEcossistema() {
 
 		terreno = new Terreno(10);
@@ -27,8 +20,8 @@ public class acoesEcossistema {
 		int quantTigre = sc.nextInt();
 		System.out.println("Digite quantos coelhos você quer que tenha no terreno: ");
 		int quantCoelho = sc.nextInt();
-		System.out.println("Digite quantas galinhas você quer que tenha no terreno: ");
-		int quantGalinha = sc.nextInt();
+		System.out.println("Digite quantos esquilos você quer que tenha no terreno: ");
+		int quantEsquilos = sc.nextInt();
 		System.out.println("Digite quantos veados você quer que tenha no terreno: ");
 		int quantVeado = sc.nextInt();
 		System.out.println("Digite quantos arbustos você quer que tenha no terreno: ");
@@ -48,8 +41,8 @@ public class acoesEcossistema {
 			animals.add(new Coelho((int) (Math.random() * 10), (int) (Math.random() * 10)));
 		}
 
-		for (int i = 0; i < quantGalinha; i++) {
-			animals.add(new Galinha((int) (Math.random() * 10), (int) (Math.random() * 10)));
+		for (int i = 0; i < quantEsquilos; i++) {
+			animals.add(new Esquilos((int) (Math.random() * 10), (int) (Math.random() * 10)));
 		}
 
 		for (int i = 0; i < quantVeado; i++) {

@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class acoesEcossistema {
+public class AcoesEcossistema {
 	private List<Animal> animals = new ArrayList<>();
 	private List<Planta> plantas = new ArrayList<>();
 	Scanner sc = new Scanner(System.in);
 
 	private Terreno terreno;
-	public acoesEcossistema() {
+	public AcoesEcossistema() {
 
 		terreno = new Terreno(10);
 

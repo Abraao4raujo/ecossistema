@@ -67,7 +67,7 @@ public class AcoesEcossistema {
 			for (Animal animal : animals) {
 				animal.andar(terreno, animals);
 			}
-
+			
 			for (Planta planta : plantas) {
 				for (Animal animal : animals) {
 					if (animal.getSpecies().equals("Presa") && planta.getType().equals("Arbusto")) {
@@ -87,18 +87,18 @@ public class AcoesEcossistema {
 			}
 
 			for (Animal predador : animals) {
-				if (predador.getSpecies().equals("Predador")) {
-					for (Animal presa : animals) {
-						if (presa.getSpecies().equals("Presa") && predador.podeAtacar(presa)) {
-							if (presa.getSpecies().equals("Presa") && presa.getLife() > 0
-									&& predador.getAtualX() == presa.getAtualX()
-									&& predador.getAtualY() == presa.getAtualY() && predador.podeAtacar(presa)) {
-								predador.atacar(presa);
-								System.out.printf("%s atacou o %s%n", predador.getName(), presa.getName());
-							}
-						}
-					}
-				}
+			    if (predador.getSpecies().equals("Predador")) {
+			        for (Animal presa : animals) {
+			            if (presa instanceof Esquilos && presa.getSpecies().equals("Presa") && predador.podeAtacar(presa)) {
+			                if (presa.getLife() > 0 && predador.getAtualX() == presa.getAtualX()
+			                        && predador.getAtualY() == presa.getAtualY() && predador.podeAtacar(presa)) {
+			                    ((Esquilos) presa).fazerBarulho();
+			                    predador.atacar(presa);
+			                    System.out.printf("%s atacou o %s%n", predador.getName(), presa.getName());
+			                }
+			            }
+			        }
+			    }
 			}
 
 			List<Animal> deadAnimals = new ArrayList<>();

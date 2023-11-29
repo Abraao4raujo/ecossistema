@@ -113,4 +113,8 @@ public class Animal {
 			outroAnimal.decreaseLife();
 		}
 	}
+	
+	public void fazerBarulho() {
+        System.out.printf("Algum animal está fazendo um barulho estranho.\n");
+    }
 }

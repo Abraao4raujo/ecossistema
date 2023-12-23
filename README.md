@@ -1,8 +1,5 @@
 # Ecossistema de Animais na Floresta
 
-### Nome: Abraão Araujo
-### Matricula: 01608103
-
 Este é um programa que simula um ecossistema de animais em uma floresta. Os animais têm comportamentos específicos que afetam seu movimento e interação com outros animais e elementos do ambiente. Abaixo, você encontrará informações detalhadas sobre o funcionamento do ecossistema, o tamanho do terreno e as siglas dos animais que aparecerão no ambiente.
 
 ## Tamanho do Terreno🌎🗺
